@@ -12,7 +12,7 @@ module.exports = http => {
   });
 
   setInterval(() => {
-    getTicker('eth').then(res => {
+    getTicker(['eth', 'bch', 'ltc']).then(res => {
       io.emit('ticker_update', res);
     });
   }, 2000);

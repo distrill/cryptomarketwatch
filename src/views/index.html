@@ -8,17 +8,17 @@
 
 <body>
   <div>
-    <br />poloniex: <span id="poloniex">--</span>
-    <br />bittrex: <span id="bittrex">--</span>
-    <br />liqui: <span id="liqui">--</span>
+    <br />eth: <span id="eth">--</span>
+    <br />bch: <span id="bch">--</span>
+    <br />ltc: <span id="ltc">--</span>
   </div>
   <script>
     $(function () {
       var socket = io();
       socket.on('ticker_update', function (info) {
-        $('#poloniex').text(info.poloniex);
-        $('#bittrex').text(info.bittrex);
-        $('#liqui').text(info.liqui);
+        $('#eth').text(JSON.stringify(info.eth));
+        $('#bch').text(JSON.stringify(info.bch));
+        $('#ltc').text(JSON.stringify(info.ltc));
       });
     });
   </script>

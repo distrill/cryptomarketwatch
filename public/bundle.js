@@ -28099,7 +28099,7 @@ var CompareExchanges = function (_Component) {
         'div',
         null,
         coins && Object.keys(coins).map(function (coin) {
-          return _react2.default.createElement(_coin_overview2.default, { name: coin });
+          return _react2.default.createElement(_coin_overview2.default, { name: coin, key: coin });
         })
       );
     }
@@ -31331,12 +31331,6 @@ var CoinOverview = function CoinOverview(_ref) {
 CoinOverview.propTypes = {
   name: _propTypes2.default.string.isRequired
 };
-
-// function mapStateToProps(state) {
-//   return {
-
-//   }
-// }
 
 exports.default = (0, _reactRedux.connect)(null, null)(CoinOverview);
 

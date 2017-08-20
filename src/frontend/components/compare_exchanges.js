@@ -16,7 +16,7 @@ class CompareExchanges extends Component {
     const { coins } = this.props;
     return (
       <div>
-        {coins && Object.keys(coins).map(coin => <CoinOverview name={coin} />)}
+        {coins && Object.keys(coins).map(coin => <CoinOverview name={coin} key={coin} />)}
       </div>
     );
   }

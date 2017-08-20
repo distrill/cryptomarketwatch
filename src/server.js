@@ -1,6 +1,8 @@
 const app = require('express')();
 const http = require('http').Server(app);
 
+const port = process.env.PORT || 3000;
+
 require('./socket')(http);
 
 app.get('/', (req, res) => {
@@ -8,6 +10,6 @@ app.get('/', (req, res) => {
   // getTicker(['eth', 'bch', 'ltc']).then(shit => res.json(shit));
 });
 
-http.listen(3000, () => {
-  console.log('listening on *:3000');
+http.listen(port, () => {
+  console.log(`listening on *:${port}`);
 });

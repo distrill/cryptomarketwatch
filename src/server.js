@@ -6,7 +6,7 @@ const app = express();
 const server = http.Server(app);
 const port = process.env.PORT || 3000;
 
-require('./socket')(server);
+require('./socket/server')(server);
 
 const publicPath = path.join(__dirname, '..', 'public');
 

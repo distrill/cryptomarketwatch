@@ -1,19 +1,8 @@
-let nextTodoId = 0;
-export const addTodo = text => {
-  nextTodoId += 1;
+export const UPDATE_COIN_DATA = 'UPDATE_COIN_DATA';
+
+export const updateCoinData = coinData => {
   return {
-    type: 'ADD_TODO',
-    id: nextTodoId,
-    text,
+    type: UPDATE_COIN_DATA,
+    coins: coinData,
   };
 };
-
-export const setVisibilityFilter = filter => ({
-  type: 'SET_VISIBILITY_FILTER',
-  filter,
-});
-
-export const toggleTodo = id => ({
-  type: 'TOGGLE_TODO',
-  id,
-});

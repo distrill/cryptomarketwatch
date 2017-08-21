@@ -60,11 +60,11 @@ function getTicker(coins) {
   ]).spread((bittrexLast, poloniexLast, liquiLast) => {
     return coins.reduce((accum, coin) => {
       return Object.assign({}, accum, {
-        [coin]: {
-          poloniex: poloniexLast[coin],
-          bitterex: bittrexLast[coin],
-          liqui: liquiLast[coin],
-        },
+        [coin]: [
+          { exchange: 'bittrex', price: bittrexLast[coin] },
+          { exchange: 'poloniex', price: poloniexLast[coin] },
+          { exchange: 'liqui', price: liquiLast[coin] },
+        ],
       });
     }, {});
   });

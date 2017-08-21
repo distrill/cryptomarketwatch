@@ -31319,20 +31319,32 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CoinOverview = function CoinOverview(_ref) {
-  var name = _ref.name;
+  var name = _ref.name,
+      coins = _ref.coins;
 
+  var coinData = coins[name];
   return _react2.default.createElement(
     'div',
     null,
-    name
+    name,
+    ': ',
+    JSON.stringify(coinData)
   );
 };
 
 CoinOverview.propTypes = {
-  name: _propTypes2.default.string.isRequired
+  name: _propTypes2.default.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  coins: _propTypes2.default.object.isRequired
 };
 
-exports.default = (0, _reactRedux.connect)(null, null)(CoinOverview);
+function mapStateToProps(state) {
+  return {
+    coins: state.coins
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(CoinOverview);
 
 /***/ }),
 /* 273 */

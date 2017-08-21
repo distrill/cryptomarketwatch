@@ -2,16 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const CoinOverview = ({ name }) => {
+const CoinOverview = ({ name, coins }) => {
+  const coinData = coins[name];
   return (
     <div>
-      {name}
+      {name}: {JSON.stringify(coinData)}
     </div>
   );
 };
 
 CoinOverview.propTypes = {
   name: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  coins: PropTypes.object.isRequired,
 };
 
-export default connect(null, null)(CoinOverview);
+function mapStateToProps(state) {
+  return {
+    coins: state.coins,
+  };
+}
+
+export default connect(mapStateToProps)(CoinOverview);

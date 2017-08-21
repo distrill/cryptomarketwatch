@@ -15,7 +15,25 @@ const CoinOverview = ({ name, coins }) => {
       accessor: 'price',
     },
   ];
-  return <ReactTable data={coinData} columns={columns} showPagination={false} />;
+  return (
+    <div className="coin-overview">
+      <h3 className="overview-header">
+        {name}
+      </h3>
+      <ReactTable
+        data={coinData}
+        columns={columns}
+        showPagination={false}
+        pageSize={coinData.length}
+        defaultSorted={[
+          {
+            id: 'price',
+            asc: true,
+          },
+        ]}
+      />
+    </div>
+  );
 };
 
 CoinOverview.propTypes = {

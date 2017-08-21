@@ -28400,7 +28400,7 @@ var CompareExchanges = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'compare-exchanges' },
         coins && Object.keys(coins).map(function (coin) {
           return _react2.default.createElement(_coin_overview2.default, { name: coin, key: coin });
         })
@@ -31637,7 +31637,25 @@ var CoinOverview = function CoinOverview(_ref) {
     Header: 'price',
     accessor: 'price'
   }];
-  return _react2.default.createElement(_reactTable2.default, { data: coinData, columns: columns, showPagination: false });
+  return _react2.default.createElement(
+    'div',
+    { className: 'coin-overview' },
+    _react2.default.createElement(
+      'h3',
+      { className: 'overview-header' },
+      name
+    ),
+    _react2.default.createElement(_reactTable2.default, {
+      data: coinData,
+      columns: columns,
+      showPagination: false,
+      pageSize: coinData.length,
+      defaultSorted: [{
+        id: 'price',
+        asc: true
+      }]
+    })
+  );
 };
 
 CoinOverview.propTypes = {

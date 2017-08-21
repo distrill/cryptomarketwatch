@@ -1,0 +1,12 @@
+.compare-exchanges {
+  text-align: center;
+}
+
+.coin-overview {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.overview-header {
+  text-decoration: underline;
+}

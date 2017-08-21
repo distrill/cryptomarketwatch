@@ -15,7 +15,7 @@ class CompareExchanges extends Component {
   render() {
     const { coins } = this.props;
     return (
-      <div>
+      <div className="compare-exchanges">
         {coins && Object.keys(coins).map(coin => <CoinOverview name={coin} key={coin} />)}
       </div>
     );

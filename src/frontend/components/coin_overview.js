@@ -3,12 +3,21 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactTable from 'react-table';
 
+function getDisplayCell(exchange) {
+  return (
+    <div className={`color-${exchange}`}>
+      {exchange}
+    </div>
+  );
+}
+
 const CoinOverview = ({ name, coins }) => {
   const coinData = coins[name];
   const columns = [
     {
       Header: 'exchange',
       accessor: 'exchange',
+      Cell: row => getDisplayCell(row.value),
     },
     {
       Header: 'price',

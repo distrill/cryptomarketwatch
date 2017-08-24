@@ -20,3 +20,7 @@ app.get('/', (req, res) => {
 server.listen(port, () => {
   console.log(`listening on *:${port}`);
 });
+
+process.on('unhandledRejection', (reason, p) => {
+  console.log('Unhandled Rejection at:', p, 'reason:', reason);
+});

@@ -5,10 +5,19 @@ const Promise = require('bluebird');
 class Liqui extends Base {
   constructor() {
     super('https://api.liqui.io/api/3');
+    this.btcPrefix = '_btc';
   }
 
   getCoins() {
-    console.log(this.baseUrl);
+    const options = {
+      uri: `${this.baseUrl}/info`,
+      json: true,
+    };
+    return rp(options).then(response => {
+      return Object.keys(response.pairs)
+        .filter(elem => elem.includes(this.btcPrefix))
+        .map(elem => elem.replace(this.btcPrefix, '').toUpperCase());
+    });
   }
 
   ticker(coins) {
@@ -17,17 +26,19 @@ class Liqui extends Base {
       const coin = rawCoin === 'bch' ? 'bcc' : rawCoin;
       return `${coin.toLowerCase()}_btc`;
     }
-    function doTheThing(accum, coin) {
+    function processTickerInfo(accum, coin) {
       const currencyPair = getCurrencyPair(coin);
       const options = {
         uri: `${uri}/${currencyPair}`,
         json: true,
       };
-      return rp(options).then(res => {
-        return Object.assign({}, accum, { [coin]: res[currencyPair].last });
-      });
+      return rp(options)
+        .then(res => {
+          return Object.assign({}, accum, { [coin]: res[currencyPair].last });
+        })
+        .catch(() => Object.assign({}, accum, { [coin]: '--' }));
     }
-    return Promise.reduce(coins, doTheThing, {});
+    return Promise.reduce(coins, processTickerInfo, {});
   }
 }
 

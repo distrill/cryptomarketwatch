@@ -1,4 +1,6 @@
 const Promise = require('bluebird');
+const { intersection } = require('lodash');
+
 const Bittrex = require('./bittrex');
 const Poloniex = require('./poloniex');
 const Liqui = require('./liqui');
@@ -7,10 +9,19 @@ const bittrex = new Bittrex();
 const poloniex = new Poloniex();
 const liqui = new Liqui();
 
-function getCoins() {}
+function getCoins() {
+  return Promise.all([
+    bittrex.getCoins(),
+    poloniex.getCoins(),
+    liqui.getCoins(),
+  ]).then(exchangeCoins => {
+    // we want coins that are in each exchange
+    return intersection(...exchangeCoins);
+  });
+}
 
 async function getTicker() {
-  const coins = ['eth', 'bch', 'ltc'];
+  const coins = await getCoins();
   return Promise.all([
     bittrex.ticker(coins),
     poloniex.ticker(coins),

@@ -8,7 +8,15 @@ class Bittrex extends BaseApi {
   }
 
   getCoins() {
-    console.log(this.baseUrl);
+    const options = {
+      uri: `${this.baseUrl}/public/getmarkets`,
+      json: true,
+    };
+    return rp(options).then(response => {
+      return response.result
+        .filter(elem => elem.BaseCurrency === 'BTC')
+        .map(elem => elem.MarketCurrency.toUpperCase());
+    });
   }
 
   ticker(coins) {
@@ -17,7 +25,8 @@ class Bittrex extends BaseApi {
       const coin = rawCoin === 'bch' ? 'bcc' : rawCoin;
       return `BTC-${coin.toUpperCase()}`;
     }
-    function doTheThing(accum, coin) {
+
+    function processTickerInfo(accum, coin) {
       const currencyPair = getCurrencyPair(coin);
       const options = {
         uri,
@@ -26,9 +35,12 @@ class Bittrex extends BaseApi {
         },
         json: true,
       };
-      return rp(options).then(res => Object.assign({}, accum, { [coin]: res.result.Last }));
+      return rp(options)
+        .then(res => Object.assign({}, accum, { [coin]: res.result.Last }))
+        .catch(() => '--');
     }
-    return Promise.reduce(coins, doTheThing, {});
+
+    return Promise.reduce(coins, processTickerInfo, {});
   }
 }
 

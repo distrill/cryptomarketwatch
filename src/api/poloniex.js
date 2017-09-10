@@ -1,7 +1,7 @@
-const Base = require('./base');
+const BaseExchange = require('./exchange');
 const rp = require('request-promise');
 
-class Poloniex extends Base {
+class Poloniex extends BaseExchange {
   constructor() {
     super('https://poloniex.com');
     this.btcPrefix = 'BTC_';

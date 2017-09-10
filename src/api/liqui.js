@@ -1,8 +1,8 @@
-const Base = require('./base');
+const BaseExchange = require('./exchange');
 const rp = require('request-promise');
 const Promise = require('bluebird');
 
-class Liqui extends Base {
+class Liqui extends BaseExchange {
   constructor() {
     super('https://api.liqui.io/api/3');
     this.btcPrefix = '_btc';

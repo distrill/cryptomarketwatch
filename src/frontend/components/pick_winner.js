@@ -5,30 +5,34 @@ import PropTypes from 'prop-types';
 import { update } from './../../socket/client';
 import { socket } from './../../../config';
 import * as actions from './../actions';
-import CoinOverview from './coin_overview';
 
-const { UPDATE_COIN_DATA_EVENT } = socket;
+const { UPDATE_WINNER_EVENT } = socket;
 
-class CompareExchanges extends Component {
+class PickWinner extends Component {
   constructor(props) {
     super(props);
-    update(UPDATE_COIN_DATA_EVENT, props.actions.updateCoinData);
+    update(UPDATE_WINNER_EVENT, props.actions.updateWinner);
   }
 
   render() {
-    const { coins } = this.props;
+    const winner = this.props.winner.toLowerCase();
     return (
-      <div className="compare-exchanges">
-        {coins && Object.keys(coins).map(coin => <CoinOverview name={coin} key={coin} />)}
+      <div className="pick-winner">
+        {'polo hype money winner: '}
+        <a
+          target="_blank"
+          href={`http://poloniex.com/exchange#btc_${winner}`}
+        >
+          {winner}
+        </a>
       </div>
     );
   }
 }
 
-CompareExchanges.propTypes = {
+PickWinner.propTypes = {
   actions: PropTypes.objectOf(PropTypes.func).isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  coins: PropTypes.object.isRequired,
+  winner: PropTypes.string.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
@@ -39,8 +43,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    coins: state.coins,
+    winner: state.winner,
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompareExchanges);
+export default connect(mapStateToProps, mapDispatchToProps)(PickWinner);

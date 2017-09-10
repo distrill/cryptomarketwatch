@@ -1,5 +1,6 @@
 const Promise = require('bluebird');
 const { intersection } = require('lodash');
+const { pickWinner } = require('./polo_hype_money');
 
 const Bittrex = require('./bittrex');
 const Poloniex = require('./poloniex');
@@ -39,4 +40,4 @@ async function getTicker() {
   });
 }
 
-module.exports = { getTicker, getCoins };
+module.exports = { getTicker, getCoins, pickWinner };

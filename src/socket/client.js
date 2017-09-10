@@ -2,8 +2,8 @@ const openSocket = require('socket.io-client');
 
 const socket = openSocket();
 
-function tickerUpdate(cb) {
-  socket.on('ticker_update', cb);
+function update(event, cb) {
+  socket.on(event, cb);
 }
 
-module.exports = { tickerUpdate };
+module.exports = { update };

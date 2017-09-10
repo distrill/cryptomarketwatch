@@ -1,5 +1,6 @@
 const socketIo = require('socket.io');
-const { getTicker } = require('./../api');
+const { getTicker, pickWinner } = require('./../api');
+const { UPDATE_COIN_DATA_EVENT, UPDATE_WINNER_EVENT } = require('./../../config/socket');
 
 module.exports = http => {
   const io = socketIo(http);
@@ -12,8 +13,11 @@ module.exports = http => {
   });
 
   setInterval(() => {
-    getTicker(['eth', 'bch', 'ltc']).then(res => {
-      io.emit('ticker_update', res);
+    getTicker().then(res => {
+      io.emit(UPDATE_COIN_DATA_EVENT, res);
+    });
+    pickWinner().then(res => {
+      io.emit(UPDATE_WINNER_EVENT, res);
     });
   }, 2000);
 };

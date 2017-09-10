@@ -1,8 +1,8 @@
 const Promise = require('bluebird');
 const rp = require('request-promise');
-const BaseApi = require('./base');
+const BaseExchange = require('./exchange');
 
-class Bittrex extends BaseApi {
+class Bittrex extends BaseExchange {
   constructor() {
     super('https://bittrex.com/api/v1.1');
   }

@@ -1,3 +1,3 @@
-const { getCoins } = require('./../src/api');
+const { pickWinner } = require('./../src/api');
 
-getCoins().then(console.log).catch(console.log);
+pickWinner().then(console.log).catch(console.log);

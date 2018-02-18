@@ -34,3 +34,5 @@ gulp.task('nodemon', () => {
 gulp.task('watch', () => {
   return gulp.watch(['./src/frontend/**/*.js'], ['webpack']);
 });
+
+console.log('this is master');
